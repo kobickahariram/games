@@ -1,0 +1,59 @@
+import random
+player_1_name = input('Enter your name ')
+play = input('Would you like to play rock,paper,scissors? y/n ')
+while play != 'y' and play != 'n':
+    play = input('Error: Would you like to play rock,paper,scissors? y/n ')
+if play == 'n':
+    print('No problem!')
+play_again = ''
+score = 0
+comp_score = 0
+game = 0
+while play == 'y' or play_again == 'y':
+    game = game + 1
+    print('GAME {}: {} vs computer'.format(game, player_1_name))
+    player_1 = input('Choose rock paper or scissors ')
+    while player_1 != 'rock' and player_1 != 'scissors' and player_1 != 'paper':
+        player_1 = input('Error: Please choose with rock paper or scissors ')
+    print('{} chose {}'.format(player_1_name,player_1))
+    choices = ['rock','paper','scissors']
+    computer = random.choice(choices)
+    print('Computer chose {}'.format(computer))
+
+    sci_vs_pap = player_1 == 'scissors' and computer == 'paper'
+    pap_vs_roc = player_1 == 'paper' and computer == 'rock'
+    roc_vs_sci = player_1 == 'rock' and computer == 'scissors'
+
+    win = sci_vs_pap or pap_vs_roc or roc_vs_sci
+
+    if win == True:
+        print('You win')
+        score = score + 1
+        comp_score = comp_score - 1
+        print('Current score: {}'.format(score))
+    elif player_1 == computer:
+        print('You draw')
+        score = score + 0
+        comp_score = comp_score + 0
+        print('Current score: {}'.format(score))
+    else:
+        print('You lose')
+        score = score - 1
+        comp_score = comp_score + 1
+        print('Current score: {}'.format(score))
+
+    play_again = input('Would you like to play again? y/n ')
+    print('--------------------------------------------------')
+    while play_again != 'y' and play_again != 'n':
+        play_again = input('Error: Would you like to play again? Please type y/n ')
+        print('----------------------------------------------')
+    if play_again == 'n':
+        print('{} final score: {}'.format(player_1_name, score))
+        print('Computer final score: {}'.format(comp_score))
+        if score > comp_score:
+            print('{} wins against Computer'.format(player_1_name))
+        elif score == comp_score:
+            print('{} draws against Computer'.format(player_1_name))
+        else:
+            print('{} loses against Computer'.format(player_1_name))
+        break
